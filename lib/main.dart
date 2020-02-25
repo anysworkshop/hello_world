@@ -50,32 +50,32 @@ class Dersler {
   }
 }
 
-class Notlar {
+class Grades {
   int id;
   String name;
 
-  Notlar(this.id, this.name);
+  Grades(this.id, this.name);
 
-  static List<Notlar> getCompanies() {
-    return <Notlar>[
-      Notlar(1, 'AA'),
-      Notlar(2, 'BA'),
-      Notlar(3, 'BB'),
-      Notlar(4, 'CB'),
-      Notlar(5, 'CC'),
-      Notlar(6, 'DC'),
-      Notlar(7, 'DD'),
-      Notlar(8, 'FD'),
-      Notlar(9, 'FF'),
-      Notlar(10, 'F0'),
+  static List<Grades> getCompanies() {
+    return <Grades>[
+      Grades(1, 'AA'),
+      Grades(2, 'BA'),
+      Grades(3, 'BB'),
+      Grades(4, 'CB'),
+      Grades(5, 'CC'),
+      Grades(6, 'DC'),
+      Grades(7, 'DD'),
+      Grades(8, 'FD'),
+      Grades(9, 'FF'),
+      Grades(10, 'F0'),
     ];
   }
 }
 
-List<Notlar> _companies = Notlar.getCompanies();
-List<DropdownMenuItem<Notlar>> _dropdownMenuItems;
-Notlar _selectedCompany;
-Notlar s;
+List<Grades> _companies = Grades.getCompanies();
+List<DropdownMenuItem<Grades>> _dropdownMenuItems;
+Grades _selectedCompany;
+Grades s;
 
 class _GecmisDersler extends State<GecmisDersler> {
   void initState() {
@@ -84,11 +84,11 @@ class _GecmisDersler extends State<GecmisDersler> {
     super.initState();
   }
 
-  Notlar selectedCompany;
+  Grades selectedCompany;
 
-  List<DropdownMenuItem<Notlar>> buildDropdownMenuItems(List companies) {
-    List<DropdownMenuItem<Notlar>> items = List();
-    for (Notlar company in companies) {
+  List<DropdownMenuItem<Grades>> buildDropdownMenuItems(List companies) {
+    List<DropdownMenuItem<Grades>> items = List();
+    for (Grades company in companies) {
       items.add(
         DropdownMenuItem(
           value: company,
@@ -102,13 +102,13 @@ class _GecmisDersler extends State<GecmisDersler> {
   var currentSelectedValue;
 
 
-  List<Notlar> _selectedCompanys = [];
+  List<Grades> _selectedCompanys = [];
 
 
 
   int i = 0;
   List<ExpansionTile> list = [];
-  List<int> dersCount = [];
+  List<int> courseCount = [];
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -121,7 +121,7 @@ class _GecmisDersler extends State<GecmisDersler> {
                 setState(() {
                   // list.add(...);
                   _selectedCompanys.add(_dropdownMenuItems[0].value);
-                  dersCount.add(0);
+                  courseCount.add(0);
                 });
               },
               child: Icon(
@@ -138,10 +138,10 @@ class _GecmisDersler extends State<GecmisDersler> {
           shrinkWrap: true,
           itemBuilder: (context, int index) {
             return ExpansionTile(
-              title: Text((index + 1).toString() + '. Dönem'),
+              title: Text((index + 1).toString() + '. Term'),
               children: <Widget>[
                 ListView.builder(
-                  itemCount: dersCount[index],
+                  itemCount: courseCount[index],
                   padding: EdgeInsets.only(top: 5),
                   shrinkWrap: true,
                   itemBuilder: (context, int index2) {
@@ -155,7 +155,7 @@ class _GecmisDersler extends State<GecmisDersler> {
                               child: TextField(
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder(),
-                                    labelText: ' Ders Adı'),
+                                    labelText: ' Course Name'),
                               ),
                             ),
                             SizedBox(
@@ -171,11 +171,11 @@ class _GecmisDersler extends State<GecmisDersler> {
                               height: 30,
                               width: 80,
                               child: DropdownButton(
-                                value: _selectedCompanys[index],
+                                value: this._selectedCompanys[index],
                                 items: _dropdownMenuItems,
                                 onChanged: (value) {
                                   setState(() {
-                                    _selectedCompanys[index] = value;
+                                    this._selectedCompanys[index] = value;
                                   });
                                 },
                               ),
@@ -190,7 +190,7 @@ class _GecmisDersler extends State<GecmisDersler> {
                 GestureDetector(
                   onTap: () {
                     setState(() {
-                      dersCount[index] = dersCount[index] + 1;
+                      courseCount[index] = courseCount[index] + 1;
                     });
                   },
                   child: Icon(
